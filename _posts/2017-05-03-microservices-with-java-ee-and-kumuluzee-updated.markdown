@@ -394,7 +394,8 @@ kumuluzee:
       connection-url: jdbc:postgresql://localhost:5432/postgres
       username: postgres
       password: postgres
-      max-pool-size: 20
+      pool:
+      	max-size: 20
 {% endhighlight %}
 
 Every value defined in the yaml file can be overwritten by setting the approriate environment variable. For example, if we want to override the datasource password we can set the environemnt variable `KUMULUZEE_DATASOURCES[0]_PASSWORD` before we start our microservice. We can quickly see a pattern how we can access and override any variable in the config file.

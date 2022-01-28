@@ -1,0 +1,34 @@
+---
+layout: post
+title:  "Announcing a new minor release - KumuluzEE 3.12.0!"
+date:   2021-01-13
+author: urbim
+categories: [Product, Announcement, Developers]
+tags: [KumuluzEE, Java EE, Microservices]
+---
+
+We are excited to announce a new KumuluzEE minor version - KumuluzEE 3.12.0! The most significant feature in this
+release is the support for Java 15. Dependencies have been updated to their latest minor versions, and a collection of
+tough bugs have been cracked. Check out the full changelog below:
+
+<!--more-->
+
+#### Features:
+
+- Support for Java 15
+
+#### Enhancements:
+
+- Use the new API for Jetty SSL configuration
+- Added GraphQL as an extension group
+- Upped dependency versions
+
+#### Bugs:
+
+- Fixed integration between Agroal and Narayana for XA transactions
+- Fixed incorrect parsing of `transaction-isolation` configuration value
+- Fixed incorrect jUnit scope
+- Resolved dependency conflict in MP 3.3
+ 
+
+Check out the release on GitHub: [KumuluzEE v3.12.0](https://github.com/kumuluz/kumuluzee/releases/tag/v3.12.0)
