@@ -1,0 +1,42 @@
+---
+layout: post
+title:  "Announcing the first prerelease of KumuluzEE 4.0.0"
+date:   2022-04-11
+author: urbim
+categories: [Product, Announcement, Developers]
+tags: [KumuluzEE, Java EE, Microservices]
+---
+
+We are happy to announce the first Beta of KumuluzEE 4.0.0. This is the first prerelease of the major release, which
+brings a major Jetty upgrade, support for the latest released versions of Java, including the Java 17 LTS version and
+the use of JakartaEE 8 artifacts replacing the JavaEE 8 artifacts.
+
+<!--more-->
+
+The breaking changes in this release are:
+
+- KumuluzEE no longer supports Java 1.8 runtime, since the support for Java 1.8 has been dropped in Jetty 10.
+- Replaced JavaEE 8 artifacts with the JakartaEE 8 artifacts. If you are using JavaEE artifacts in your code, you should be able to find equivalent artifacts in the JakartaEE namespace.
+- Removed excludedAgentPatterns from gzip configuration since it was removed from Jetty.
+
+See the full changelog below.
+
+#### Features:
+
+- Upgraded from Jetty 9 to Jetty 10
+- Added support for Java 16, 17 and 18 and dropped support for Java 1.8
+- Use JakartaEE artifacts instead of JavaEE
+
+#### Enhancements:
+
+- Upped dependency versions
+- Removed excludedAgentPatterns from gzip configuration since it was removed from Jetty
+
+#### Bugs:
+
+- Updated jar loading to add support for multi-release jars when running in UberJar
+- Added missing spaces in dependency validation log messages
+- More robust exception handling when loading configuration file
+- Updated JAX-WS annotation procesor in order to support some edge cases
+
+Check out the release on GitHub: [KumuluzEE v4.0.0.beta.1](https://github.com/kumuluz/kumuluzee/releases/tag/v4.0.0-beta.1)
