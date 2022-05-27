@@ -1,0 +1,62 @@
+---
+layout: post
+title:  "KumuluzEE 4.0.0 released, with Java 17 LTS support, Jetty 10 and more!"
+date:   2022-05-27
+author: urbim
+categories: [Product, Announcement, Developers]
+tags: [KumuluzEE, Java EE, Microservices]
+---
+
+We are happy to announce the next major release of KumuluzEE 4.0.0. This release includes a major Jetty upgrade, support
+for the latest released versions of Java, including the Java 17 LTS version and the use of JakartaEE 8 artifacts
+replacing the JavaEE 8 artifacts.
+
+<!--more-->
+
+One of the major changes of this release is definitely the added support for the Java version 17. Java 17 is the latest
+LTS version, which are the most suitable versions for production use. Compared to the previous LST version (Java 11),
+Java 17 brings exciting new features such as records, text blocks, enhanced switch expressions, pattern matching of
+the `instanceof` operator, teeing collector for the Stream API and more.
+
+Another exciting change in the new release of KumuluzEE is the transition from Jetty 9 to Jetty 10. The updated
+version of Jetty brings many important bugfixes and improvements. The Servlet API 4.0 is now fully implemented allowing
+better HTTP/2 support within internal components and general Servlet 4.0 usage according to the specification. The
+WebSocket implementation has been refactored, also allowing HTTP/2 usage. The Jetty HTTP client (used by internal
+components and our extensions, e.g. JAX-RS HTTP client, kumuluzee-rest-client's backing HTTP client) has also been
+improved, with the major feature being the support for dynamic protocol upgrade to HTTP/2.
+
+Another change in relation to Java versions is the end of support for the Java 1.8 runtime. The support for Java 1.8
+was dropped in Jetty 10 and in turn we are also dropping support in KumuluzEE 4. If you are still running on Java 1.8,
+this is the perfect opportunity to upgrade, as the newer Java versions bring many exciting features.
+
+Another transition we have made (also related to the Jetty 10 upgrade) is the transition from JavaEE 8 to JakartaEE 8
+artifacts. This transition should not affect the actual code, only the locations and names of Maven artifacts.
+If you are referencing any JavaEE artifacts in your code, make sure to update the references there too.
+
+The full list of breaking changes in this release:
+
+- KumuluzEE no longer supports Java 1.8 runtime, since the support for Java 1.8 has been dropped in Jetty 10.
+- Replaced JavaEE 8 artifacts with the JakartaEE 8 artifacts. If you are using JavaEE artifacts in your code, you should be able to find equivalent artifacts in the JakartaEE namespace.
+- Removed excludedAgentPatterns from gzip configuration since it was removed from Jetty.
+
+See the full changelog below.
+
+#### Features:
+
+- Upgraded from Jetty 9 to Jetty 10
+- Added support for Java 16, 17 and 18 and dropped support for Java 1.8
+- Use JakartaEE artifacts instead of JavaEE
+
+#### Enhancements:
+
+- Upped dependency versions
+- Removed excludedAgentPatterns from gzip configuration since it was removed from Jetty
+
+#### Bugs:
+
+- Updated jar loading to add support for multi-release jars when running in UberJar
+- Added missing spaces in dependency validation log messages
+- More robust exception handling when loading configuration file
+- Updated JAX-WS annotation processor in order to support some edge cases
+
+Check out the release on GitHub: [KumuluzEE v4.0.0](https://github.com/kumuluz/kumuluzee/releases/tag/v4.0.0)
