@@ -1,0 +1,92 @@
+---
+layout: post
+title:  "Announcing KumuluzEE 4.1.0 release - with improvements to the configuration framework!"
+date:   2022-06-21
+author: urbim
+categories: [Product, Announcement, Developers]
+tags: [KumuluzEE, Java EE, Microservices]
+---
+
+We are announcing the availability of KumuluzEE version 4.1.0.
+
+This release brings improvements to the configuration framework, such as configuration profiles, improved variable
+interpolation, and more!
+
+<!--more-->
+
+Configuration profiles can be used to define plug-in configuration fragments, that can be turned on or off at the
+deployment time. The fragments can define new configuration values or override existing ones in `config.yml` file.
+Let's look at an example defining the profile `live`. Start by defining the `config.yml` file as usual:
+
+__config.yml__
+
+```yaml
+integrations:
+  customer-service:
+    url: http://localhost:8081
+```
+
+Now let's define the `live` profile fragment:
+
+__config-live.yml__
+
+```yaml
+integrations:
+  customer-service:
+    url: http://customer-service.example.com:8081
+```
+
+When deploying the service, the profile can be activated by setting the configuration value `kumuluzee.config.profile`
+to `live`, for example add the environment variable:
+
+```
+KUMULUZEE_CONFIG_PROFILE=live
+```
+
+Multiple configuration profiles can be activated by setting the configuration value `kumuluzee.config.profile` as CSV.
+When overriding values, the last defined profile has the largest priority. For example: `KUMULUZEE_CONFIG_PROFILE=docker,live`.
+
+The configuration profiles mechanism is generic and can be used to alter the behavior of your custom
+`ConfigurationSource` implementations by implementing the `initProfile(String profileName)` function of the interface.
+The interface now also defines the default implementations of converter functions, which makes implementing custom
+configuration sources easier and avoids duplication of implementations when the backing configuration source returns
+only `String` values.
+
+Another improvement added in this release is the support for nested value interpolation and support for default values
+when using value interpolation. To understand these changes better, take a look at the next configuration:
+
+```yaml
+integrations:
+  active-tenant: t2
+  tenant-t1:
+    url: t1.example.com
+  tenant-t2:
+    url: t2.example.com
+  
+  customer-service:
+    url: ${integrations.tenant-${integrations.active-tenant:t1}.url}/customer-service
+```
+
+In this case the `integrations.customer-service.url` configuration would be `t2.example.com`, since
+`integrations.active-tenant` is `t2`. If active tenant configuration key would not be defined, the default value
+(`t1`, defined after the `:`) would be used instead.
+
+See the full changelog below.
+
+#### Features:
+
+- Added support for configuration profiles
+- FileConfigurationSource loads additional files when configuration profile is activated
+
+#### Enhancements:
+
+- Improved configuration value interpolation by adding nested interpolation and default value support
+- Implemented ConfigurationSource converter functions as default interface functions
+- Upped jandex version
+
+#### Bugs:
+
+- Fixed return value of yaml configuration source: return Optional.empty() if found config value is a Map or a List
+- Defined default implementation for the deprecated getConfigurationSource() method in order to be able to remove it in the next major version
+
+Check out the release on GitHub: [KumuluzEE v4.1.0](https://github.com/kumuluz/kumuluzee/releases/tag/v4.1.0)
