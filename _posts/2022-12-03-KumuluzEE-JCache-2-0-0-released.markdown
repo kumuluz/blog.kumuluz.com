@@ -11,6 +11,8 @@ We are excited to announce the next major version of KumuluzEE JCache - 2.0.0. T
 
 This release also uses the new configuration prefix `kumuluzee.jcache.caffeine.caches` instead of `kumuluzee.jcache.caffeine.caffeine.jcache` and adds support for the entire configuration framework instead only yaml files, including overriding properties from ENV variables.
 
+<!--more-->
+
 ##### An example of migration to the new configuration prefix:
 
 Old:
