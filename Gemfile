@@ -1,8 +1,7 @@
 source 'https://rubygems.org'
 
-require 'json'
-require 'open-uri'
-versions = JSON.parse(open('https://pages.github.com/versions.json').read)
+# Use the latest github-pages gem for security updates
+gem 'github-pages', '~> 231', group: :jekyll_plugins
 
-# gem 'github-pages', versions['github-pages']
-gem 'github-pages', '203'
+# Explicitly specify webrick for Ruby 3.0+
+gem 'webrick', '~> 1.8'
