@@ -4,6 +4,12 @@
 
 [build.environment]
   RUBY_VERSION = "3.2.0"
+  
+[[plugins]]
+  package = "@netlify/plugin-csp-nonce"
+  [plugins.inputs]
+    reportOnly = false
+    unsafeEval = false
 
 # Security headers
 [[headers]]
