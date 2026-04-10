@@ -1,0 +1,8 @@
+{
+  "name": "blog-kumuluz-si",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@netlify/plugin-csp-nonce": "^1.6.2"
+  }
+}
